@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Page Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="heading">
+        <p>This is Simple Single Page Application!</p>
+    </div>
+    <div class="main-content">
+        <script type="text/ng-template" id="Mt.html">
+                <h2>Mobile Technology</h2>
+            <div ng-repeat='(unit,details) in msg'>
+                <h3>{{ unit }} - {{ details }}</h3>
+            </div>
+        </script>
+    </div>
+    <div class="main-content">
+        <script type="text/ng-template" id="Daa.html">
+            <h2>Data Analysis Of Algorithm</h2>
+        <div ng-repeat='(unit,details) in msg'>
+            <h3>{{ unit }} - {{ details }}</h3>
+        </div>
+        </script>
+    </div>
+    <div class="main-content">
+        <script type="text/ng-template" id="fsd.html">
+            <h2>Full Stack Development</h2>
+        <div ng-repeat='(unit,details) in msg'>
+            <h3>{{ unit }} - {{ details }}</h3>
+        </div>
+    </script>
+    </div>
+
+    <div class="main-content">
+        <script type="text/ng-template" id="spm.html">
+        <div>
+            <h2>Software Project Management</h2>
+        </div>
+        <div ng-repeat='(unit,details) in msg'>
+            <h3>{{ unit }} - {{ details }}</h3>
+        </div>
+    </script>
+    </div>
+
+    <div class="nav-links">
+        <a href="#/">MT</a>
+        <a href="#/Daa">DAA</a>
+        <a href="#/Fsd">FSD</a>
+        <a href="#/Spm">SPM</a>
+    </div>
+
+
+    <div class="view" ng-view></div>
+    <script>
+        var app = angular.module('myApp', ['ngRoute']);
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: "Mt.html",
+                    controller: "Mtcontroller"
+                })
+                .when('/Daa', {
+                    templateUrl: "Daa.html",
+                    controller: "Dacontroller"
+                })
+                .when('/Fsd', {
+                    templateUrl: "fsd.html",
+                    controller: "fsdcontroller"
+                })
+                .when('/Spm', {
+                    templateUrl: "spm.html",
+                    controller: "Spmcontroller"
+                })
+                .otherwise({ redirectTo: '/' });
+        });
+        app.controller('Dacontroller', function ($scope) {
+            $scope.msg = {
+                'Unit 1': 'Basics Of Algorithms',
+                'Unit 2': 'Divide and Conquer Strategy',
+                'Unit 3': 'Greed Method'
+            };
+        });
+        app.controller('Mtcontroller', function ($scope) {
+            $scope.msg = {
+                'Unit 1': 'Introduction Mobile Technologies',
+                'Unit 2': 'Fundamentals of Andriod Programming',
+                'Unit 3': 'Andriod activity, Intents, and Services'
+            };
+        });
+        app.controller('fsdcontroller', function ($scope) {
+            $scope.msg = {
+                'Unit 1': 'Introduction to MEAN Stack',
+                'Unit 2': 'Advanced ES6 And Typescript',
+                'Unit 3': 'AngularJs'
+            };
+        });
+        app.controller('Spmcontroller', function ($scope) {
+            $scope.msg = {
+                'Unit 1': 'Introduction to Project Managment',
+                'Unit 2': 'Porject Managment Components',
+                'Unit 3': 'Scope, Time and Cost-Managment'
+            };
+        });
+    </script>
+</body>
+
+</html>
